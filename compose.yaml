@@ -1,0 +1,48 @@
+version: '3.6'
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:16.8.2-ce.0
+    container_name: gitlab
+    restart: unless-stopped
+    hostname: 'gitlab.jkantech.com'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: "from_file('/omnibus_config.rb')"
+    ports:
+      - '22:22'
+    volumes:
+      - config:/etc/gitlab
+      - logs:/var/log/gitlab
+      - data:/var/opt/gitlab
+    #deploy:
+     # resources:
+      #  limits:
+       #   cpus: '2'
+        #  memory: 4096M
+    shm_size: '256m'
+    configs:
+      - source: gitlab
+        target: /omnibus_config.rb
+    networks:
+      - web
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    container_name: gitlab-runner
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - runner-data:/etc/gitlab-runner
+      - /tmp/runner:/home/gitlab-runner
+    networks:
+      - web
+configs:
+  gitlab:
+    file: ./gitlab.rb
+networks:
+  internal:
+    external: true
+  web:
+    external: true
+volumes:
+  runner-data:
+  logs:
+  config:
+  data:
