@@ -1,5 +1,5 @@
-external_url 'https://gitlab.jkantech.com'
-gitlab_rails['initial_root_password'] = ""
+external_url 'https://gitlab.example.com'
+gitlab_rails['initial_root_password'] = "my strong password"
 letsencrypt['contact_emails'] = ['admin@example.com'] # Optional
 
 gitlab_rails['smtp_enable'] = true
