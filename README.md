@@ -73,7 +73,6 @@ runners:
          tls_verify = false
          image = "docker:27"
          privileged = true
-         poll_timeout = 2000
          [[runners.kubernetes.volumes.host_path]]
           name = "docker-sock"
           mount_path = "/var/run/docker.sock"
