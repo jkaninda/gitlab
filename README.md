@@ -74,10 +74,10 @@ runners:
          image = "docker:27"
          privileged = true
          [[runners.kubernetes.volumes.host_path]]
-          name = "docker-sock"
-          mount_path = "/var/run/docker.sock"
-          read_only = false
-          host_path = "/var/run/docker.sock"
+            name = "docker-sock"
+            mount_path = "/var/run/docker.sock"
+            read_only = false
+            host_path = "/var/run/docker.sock"
 ```
 
 
